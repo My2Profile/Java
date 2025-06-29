@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Person {
 	private String name;
 	private int age;
@@ -11,7 +13,7 @@ public class Person {
 
 	public void setName(String name) { this.name = name; }
 
-	public boolean equals(Obj o) {
+	public boolean equals(Object o) {
 		if (this == o) { return true; }
 		if (o == null || getClass() != o.getClass()) { return false; }
 
@@ -33,19 +35,19 @@ class Employee extends Person {
 	public String getId() { return this.employeeId; }
 
 	public void setId(String id) { this.employeeId = id; }
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) { return true; }
-		if (o == null || getClass() != o.getClass() ) { return false; }
+		if (o == null || getClass() != o.getClass()) { return false; }
 
-		Employee employee = (Employee) employee;
-		return super.getAge() == employee.getAge && super.getName().equals(employee.getName()) && this.employeeId.equals(employee.getId())
+		Employee employee = (Employee) o;
+		return super.getAge() == employee.getAge()
+			&& Objects.equals(super.getName(), employee.getName())
+			&& Objects.equals(this.employeeId, employee.getId());
 	}
-
-
+	}
 	@Override
-	public int hashCode() { return Objects.hash(name, age, employeeId); }
+	public int hashCode() { return Objects.hash(getName(), getAge(), employeeId); }
 
 
 	@Override
